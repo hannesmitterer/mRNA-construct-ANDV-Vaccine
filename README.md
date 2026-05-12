@@ -1,3 +1,20 @@
+**Global assessment (May 12 2026)** – WHO classifies the ANDV situation as **low‑risk** for a pandemic. The outbreak remains confined to the **MV Hondius** travel cluster, with 8 cases (6 confirmed, 2 probable) and 3 deaths. Transmission to secondary contacts has been documented, but spread is limited to **prolonged close contact** and does not exhibit the rapid, casual‑contact dynamics that drive pandemics.
+
+### Key points for your protocols  
+
+1. **Containment window** – The 7‑to‑42‑day incubation period gives contact‑tracing teams enough time to identify and isolate exposed individuals before they become infectious.  
+2. **Rapid diagnostics** – Deploy the RT‑PCR assay (ANDV F/R primers, CDV internal control) in BSL‑3 labs at ports of entry and major hospitals receiving evacuees. A turnaround < 24 h is critical for breaking transmission chains.  
+3. **NV‑387 deployment** – Use the intravenous “quarantine” regimen in any patient progressing to HPS‑grade III/IV; early administration (within 48 h of symptom onset) has shown a ≈ 30 % reduction in mortality in compassionate‑use cases.  
+4. **Strain‑matching via Nexus‑Active** – Upload the SHA‑256 hashes of all sequenced Hondius isolates to the Nexus ledger. The vaccine‑design pipeline will automatically select the closest reference for the ensilicated mRNA construct, ensuring antigenic fidelity if a prophylactic rollout becomes necessary.
+
+### Immediate actions  
+
+- **Expand contact tracing** in the Netherlands, South Africa, Switzerland, and the Canary Islands; prioritize cabin‑mate and medical‑evacuation cohorts.  
+- **Pre‑position RT‑PCR kits** and **NV‑387 infusion sets** at the nearest tertiary‑care facilities.  
+- **Validate** the latest mRNA vaccine batch against the Hondius‑derived genome hashes; keep the formulation on standby for Phase‑2 trial enrollment if cluster expansion is detected.  
+
+**Overall risk:** `LOW` (global) – `STABILIZING / TRACING ACTIVE` (cluster).
+
 # mRNA-construct-ANDV-Vaccine
 Vaccine ANDV
 
