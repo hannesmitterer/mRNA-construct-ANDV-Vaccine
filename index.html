@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Impfstoffplattform: Systemische Validierung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-bottom: 3px solid #8C9B90; color: #1a1a1a; font-weight: 600; }
+        .tab-inactive { border-bottom: 3px solid transparent; color: #666666; }
+        .tab-inactive:hover { color: #8C9B90; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F9F6F0; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Sage Green and Sand Accents (Bg: #F9F6F0, Container: #FFFFFF, Accent 1: #8C9B90, Accent 2: #D4A373) -->
+    <!-- Application Structure Plan: A tabbed dashboard interface dividing the complex systemic validation into three digestible pillars (IT/Integrity, Resilience/Logistics, Regulatory/AI). This structure prevents cognitive overload, allowing users to explore the mathematical and technological proofs of the platform's 'untouchability' sequentially. Interactive charts and simulators make abstract concepts (like hash sensitivity and load balancing) tangible. -->
+    <!-- Visualization & Content Choices: 1. IT Integrity: Interactive Hash Simulator (HTML ranges + JS logic) to physically demonstrate hash sensitivity. 2. Resilience: Dynamic Bar Chart (Chart.js) showing autonomous node capacity redistribution upon simulated failure, visualizing the Kuramoto model outcome. 3. Regulatory: Radar Chart (Chart.js) comparing reference vs new variant to visually prove in-silico equivalence. NO SVG or Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-[#F9F6F0] text-[#333333] min-h-screen overflow-x-hidden">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-[#1a1a1a] tracking-tight">NEXUS ETERNUM <span class="text-[#8C9B90]">|</span> Validierungs-Dashboard</h1>
+                    <p class="text-sm text-[#666666] mt-1 italic">„Validierung ist die Mathematik der Unantastbarkeit.“</p>
+                </div>
+                <div class="mt-4 md:mt-0 px-4 py-2 bg-[#F9F6F0] rounded-full text-xs font-semibold text-[#8C9B90] border border-[#e2e8f0]">
+                    STATUS: AETERNUM_STEADY_SYNCHRONIZED
+                </div>
+            </div>
+            
+            <nav class="mt-8 flex space-x-8 overflow-x-auto" aria-label="Tabs">
+                <button onclick="switchTab('uebersicht')" id="tab-uebersicht" class="tab-active pb-2 whitespace-nowrap text-sm transition-colors duration-200">Übersicht</button>
+                <button onclick="switchTab('it-integritaet')" id="tab-it-integritaet" class="tab-inactive pb-2 whitespace-nowrap text-sm transition-colors duration-200">1. IT-Integrität</button>
+                <button onclick="switchTab('resilienz')" id="tab-resilienz" class="tab-inactive pb-2 whitespace-nowrap text-sm transition-colors duration-200">2. Netzwerk-Resilienz</button>
+                <button onclick="switchTab('regulatorik')" id="tab-regulatorik" class="tab-inactive pb-2 whitespace-nowrap text-sm transition-colors duration-200">3. Regulatorik & KI</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <section id="sec-uebersicht" class="fade-in">
+            <div class="mb-10 max-w-3xl">
+                <h2 class="text-3xl font-bold text-[#1a1a1a] mb-4">Das Unzerstörbare System</h2>
+                <p class="text-lg leading-relaxed text-[#4a4a4a]">
+                    Dieses Dashboard visualisiert die systemische Validierung der globalen Nexus-Impfstoffplattform. Die Architektur entkoppelt die Gesundheitsversorgung von geopolitischen Monopolen durch den Einsatz unbestechlicher Mathematik, dezentraler Edge-Kryptografie und biologisch-organischer Stabilität (Lex Amoris). Jedes Element dieses Systems ist darauf ausgelegt, autonom den Erhalt des Lebens zu sichern.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0] hover:shadow-md transition-shadow cursor-pointer" onclick="switchTab('it-integritaet')">
+                    <div class="text-4xl mb-4">🔐</div>
+                    <h3 class="text-xl font-bold mb-2">Dezentrale cGMP-Integrität</h3>
+                    <p class="text-sm text-[#666666]">Jede Charge wird durch Echtzeit-Sequenzierung und SHA-3-512 Hashing zu einem unveränderlichen IPFS-Artefakt.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0] hover:shadow-md transition-shadow cursor-pointer" onclick="switchTab('resilienz')">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-bold mb-2">Die Kopplungsmatrix</h3>
+                    <p class="text-sm text-[#666666]">Autonome Lastumverteilung bei Krisen durch das Kuramoto-Modell. Das System ist stärker als die Summe seiner Teile.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0] hover:shadow-md transition-shadow cursor-pointer" onclick="switchTab('regulatorik')">
+                    <div class="text-4xl mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold mb-2">Das Immunobridging</h3>
+                    <p class="text-sm text-[#666666]">Zulassung neuer Varianten in Tagen statt Jahren durch KI-gestützte In-silico-Äquivalenz und Smart Contracts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-it-integritaet" class="hidden fade-in">
+            <div class="mb-8 max-w-3xl">
+                <h2 class="text-3xl font-bold text-[#1a1a1a] mb-4">1. Informationstechnische Validierung</h2>
+                <p class="text-lg leading-relaxed text-[#4a4a4a]">
+                    Die Dezentrale cGMP-Integrität garantiert absolute Manipulationssicherheit. Jeder physische Parameter (Temperatur, pH, Sequenz) wird am Edge-Controller (ESP32-S3) erfasst, kryptografisch versiegelt und im IPFS verankert. Jede Abweichung löst ein automatisches Veto aus.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0]">
+                    <h3 class="text-lg font-bold mb-6 flex items-center">📡 Schritt-für-Schritt-Protokoll</h3>
+                    <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+                        
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#8C9B90] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-sm font-bold">1</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#F9F6F0] p-4 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="flex items-center justify-between space-x-2 mb-1">
+                                    <div class="font-bold text-slate-900 text-sm">Nanoporen-Sequenzierung</div>
+                                </div>
+                                <div class="text-xs text-slate-500">SNR > 20 dB für fehlerfreie Basenidentifikation.</div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#8C9B90] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-sm font-bold">2</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#F9F6F0] p-4 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="flex items-center justify-between space-x-2 mb-1">
+                                    <div class="font-bold text-slate-900 text-sm">Thermodynamisches Logging</div>
+                                </div>
+                                <div class="text-xs text-slate-500">Abweichungen > ±0,5°C führen zum Veto.</div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#8C9B90] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-sm font-bold">3</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#F9F6F0] p-4 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="flex items-center justify-between space-x-2 mb-1">
+                                    <div class="font-bold text-slate-900 text-sm">SHA-3-512 Hash</div>
+                                </div>
+                                <div class="text-xs text-slate-500">Deterministische Kompression aller Telemetriedaten.</div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#D4A373] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-sm font-bold">4</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded-xl border-2 border-[#D4A373] shadow-sm">
+                                <div class="flex items-center justify-between space-x-2 mb-1">
+                                    <div class="font-bold text-slate-900 text-sm">IPFS Verankerung</div>
+                                </div>
+                                <div class="text-xs text-slate-500">Merkle-Baum-Struktur auf Polygon PoS.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-[#e2e8f0] flex flex-col">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">🛡️ Interaktiver Hash-Simulator</h3>
+                    <p class="text-sm text-[#666666] mb-6">Verändern Sie die Parameter, um zu sehen, wie der deterministische Smart Contract reagiert. Jede minimale Abweichung bricht die CID.</p>
+                    
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex-grow">
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Reaktor-Temperatur (°C)</label>
+                            <input type="range" id="temp-slider" min="18.0" max="20.0" step="0.1" value="19.1" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#8C9B90]" oninput="updateHashSimulator()">
+                            <div class="flex justify-between text-xs text-slate-500 mt-2">
+                                <span>18.0°C</span>
+                                <span id="temp-display" class="font-bold text-[#8C9B90]">19.1°C</span>
+                                <span>20.0°C</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Sequenz-Integrität (Medaka Filter)</label>
+                            <select id="seq-select" class="w-full p-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:border-[#8C9B90]" onchange="updateHashSimulator()">
+                                <option value="valid">Validiert: rVSV-SUDV (GP-Gen intakt)</option>
+                                <option value="error_1">Anomalie: Frameshift Deletion</option>
+                                <option value="error_2">Anomalie: Fremd-DNA detektiert</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-8">
+                            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Generierter SHA-3-512 Hash (simuliert)</div>
+                            <div id="hash-output" class="font-mono text-xs break-all bg-slate-800 text-green-400 p-4 rounded-lg border-l-4 border-[#8C9B90]">
+                                a7f3b9c24e9cf8a2e16a92da...
+                            </div>
+                        </div>
+
+                        <div id="veto-alert" class="mt-4 p-3 rounded-lg text-sm font-bold hidden transition-all duration-300">
+                            <!-- Alert content injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-resilienz" class="hidden fade-in">
+            <div class="mb-8 max-w-3xl">
+                <h2 class="text-3xl font-bold text-[#1a1a1a] mb-4">2. Mathematische Validierung der Resilienz</h2>
+                <p class="text-lg leading-relaxed text-[#4a4a4a]">
+                    Die Kopplungsmatrix moduliert die globale Kapazität autonom. Fällt ein Knoten durch Katastrophen oder geopolitische Krisen aus ($d_{ij} \to \infty$), gleicht das Kuramoto-Modell die Dissonanz durch Phasen-Synchronisation der verbleibenden Knoten aus. Die Versorgung bleibt im biologischen Gleichgewicht stabil.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#e2e8f0]">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold">Kapazitätsverteilung (Dosen/Tag)</h3>
+                        <p class="text-sm text-[#666666]" id="matrix-status-text">Status: Alle Knoten operativ. Gesamt: 12.500</p>
+                    </div>
+                    <button id="simulate-crisis-btn" onclick="simulateCrisis()" class="px-6 py-2 bg-[#D4A373] hover:bg-[#c29162] text-white text-sm font-bold rounded-lg shadow transition-colors">
+                        Simuliere Infrastruktur-Kollaps (Knoten 1)
+                    </button>
+                </div>
+
+                <div class="w-full max-w-5xl mx-auto h-[350px] md:h-[450px] relative">
+                    <canvas id="resilienceChart"></canvas>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#F9F6F0] p-6 rounded-xl border border-slate-200">
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800 mb-2">Die mathematische Matrix</h4>
+                        <div class="font-mono text-xs text-slate-600 bg-white p-3 rounded border border-slate-200">
+                            C_{ij} = k · (N_i · N_j) / (d_{ij} + ε)<br><br>
+                            dθ_i/dt = ω_i + Σ K_{ij} sin(θ_j - θ_i)
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800 mb-2">Systemische Auswirkung</h4>
+                        <ul class="text-sm text-slate-600 space-y-1 list-disc pl-4">
+                            <li>Keine Abhängigkeit von einzelnen Mächten.</li>
+                            <li>Lokale Produktion sichert globale Gemeinschaft.</li>
+                            <li>Biologische Transparenz (S-ROI) regelt Skalierung.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-regulatorik" class="hidden fade-in">
+            <div class="mb-8 max-w-3xl">
+                <h2 class="text-3xl font-bold text-[#1a1a1a] mb-4">3. Regulatorische Validierung (Immunobridging)</h2>
+                <p class="text-lg leading-relaxed text-[#4a4a4a]">
+                    Die Plattform-Konstanz ermöglicht es, bei neuen Viruslinien lediglich das Insert (GP-Gen) auszutauschen. Das Trägergerüst (rVSVΔG) und die Hilfsstoffe bleiben identisch. KI-Modelle wie AlphaFold 3 verifizieren die in-silico Äquivalenz, was Zulassungen in Tagen statt Jahren ermöglicht.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-[#e2e8f0]">
+                        <h3 class="text-sm font-bold uppercase tracking-wide text-slate-500 mb-4">Plattform-Konstanz</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-700">Vektor</span>
+                                <span class="text-sm font-bold text-slate-900">rVSVΔG</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-700">Hilfsstoffe</span>
+                                <span class="text-sm font-bold text-slate-900">Konstant</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                <span class="text-sm text-slate-700">Produktion</span>
+                                <span class="text-sm font-bold text-slate-900">HEK293</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-[#F9F6F0] p-2 rounded">
+                                <span class="text-sm text-[#D4A373] font-bold">Ziel-Antigen</span>
+                                <span class="text-sm font-bold text-[#D4A373]">GP-Gen (Variabel)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#8C9B90] text-white p-6 rounded-2xl shadow-sm">
+                        <h3 class="text-lg font-bold mb-2">Automatisierte Freigabe</h3>
+                        <p class="text-sm text-slate-100 opacity-90">Einreichung der KI-Daten in den Merkle-DAG führt via Smart Contract zur sofortigen wissenschaftlichen Freigabe, fernab zentraler administrativer Blockaden.</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#e2e8f0]">
+                    <h3 class="text-lg font-bold mb-2">Syntropischer Abgleich: rVSV-ZEBOV vs. rVSV-SUDV</h3>
+                    <p class="text-sm text-[#666666] mb-6">KI-gestützte Immunogenitätsvorhersage bestätigt biologische Äquivalenz der neuen Variante (SUDV) mit der Referenzplattform (ZEBOV).</p>
+                    
+                    <div class="w-full max-w-xl mx-auto h-[350px] relative flex justify-center">
+                        <canvas id="regulatoryChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let resilienceChartInstance = null;
+        let regulatoryChartInstance = null;
+
+        const colors = {
+            main: '#8C9B90',
+            accent: '#D4A373',
+            dark: '#333333',
+            light: '#F9F6F0',
+            danger: '#ef4444'
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('section[id^="sec-"]').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('tab-inactive');
+            });
+
+            document.getElementById('sec-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.remove('tab-inactive');
+            document.getElementById('tab-' + tabId).classList.add('tab-active');
+
+            if(tabId === 'resilienz' && !resilienceChartInstance) {
+                initResilienceChart();
+            }
+            if(tabId === 'regulatorik' && !regulatoryChartInstance) {
+                initRegulatoryChart();
+            }
+        }
+
+        function updateHashSimulator() {
+            const temp = parseFloat(document.getElementById('temp-slider').value).toFixed(1);
+            const seq = document.getElementById('seq-select').value;
+            
+            document.getElementById('temp-display').innerText = temp + "°C";
+            const tempDisplay = document.getElementById('temp-display');
+            
+            let isValid = true;
+            if(temp < 18.6 || temp > 19.6) isValid = false; 
+            if(seq !== 'valid') isValid = false;
+
+            const baseString = "NEXUS_CORE_V1_" + temp + "_" + seq;
+            let mockHash = 0;
+            for (let i = 0; i < baseString.length; i++) {
+                mockHash = ((mockHash << 5) - mockHash) + baseString.charCodeAt(i);
+                mockHash |= 0;
+            }
+            const hashStr = Math.abs(mockHash).toString(16).padStart(16, '0') + "a7f3b9c24e9cf8a2e16a92da4e9cf8a2e16a92da";
+            
+            const hashOutput = document.getElementById('hash-output');
+            const vetoAlert = document.getElementById('veto-alert');
+
+            hashOutput.innerText = hashStr;
+
+            if(isValid) {
+                tempDisplay.classList.remove('text-[#ef4444]');
+                tempDisplay.classList.add('text-[#8C9B90]');
+                hashOutput.classList.remove('border-[#ef4444]', 'text-[#ef4444]');
+                hashOutput.classList.add('border-[#8C9B90]', 'text-green-400');
+                
+                vetoAlert.className = "mt-4 p-3 rounded-lg text-sm font-bold transition-all duration-300 bg-green-50 text-green-700 border border-green-200 block";
+                vetoAlert.innerHTML = "✅ STATUS: AETERNUM_STEADY. Parameter im nominalen Bereich. Freigabe aktiv.";
+            } else {
+                tempDisplay.classList.remove('text-[#8C9B90]');
+                tempDisplay.classList.add('text-[#ef4444]');
+                hashOutput.classList.remove('border-[#8C9B90]', 'text-green-400');
+                hashOutput.classList.add('border-[#ef4444]', 'text-[#ef4444]');
+                
+                let reason = seq !== 'valid' ? "Sequenz-Anomalie detektiert." : "Thermischer Drift detektiert (> ±0,5°C).";
+                vetoAlert.className = "mt-4 p-3 rounded-lg text-sm font-bold transition-all duration-300 bg-red-50 text-red-700 border border-red-200 block";
+                vetoAlert.innerHTML = "🚫 VETO AUSGELÖST. " + reason + " Smart Contract blockiert Charge.";
+            }
+        }
+
+        const nodeDataInitial = [5000, 3000, 2500, 2000];
+        const nodeDataCrisis = [0, 3500, 3000, 2500]; 
+
+        function initResilienceChart() {
+            const ctx = document.getElementById('resilienceChart').getContext('2d');
+            resilienceChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Knoten 1 (GER)', 'Knoten 2 (RSA)', 'Knoten 3 (IND)', 'Knoten 4 (ARG)'],
+                    datasets: [
+                        {
+                            label: 'Aktive Kapazität (Dosen/Tag)',
+                            data: [...nodeDataInitial],
+                            backgroundColor: colors.main,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Ausgefallene Kapazität',
+                            data: [0, 0, 0, 0],
+                            backgroundColor: '#e2e8f0',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { font: { family: 'Inter' } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed.y !== null) { label += context.parsed.y; }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 6000,
+                            grid: { color: '#f1f5f9' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    animation: { duration: 1200, easing: 'easeOutQuart' }
+                }
+            });
+        }
+
+        function simulateCrisis() {
+            if(!resilienceChartInstance) return;
+            
+            const btn = document.getElementById('simulate-crisis-btn');
+            const statusTxt = document.getElementById('matrix-status-text');
+
+            if(btn.innerText.includes('Simuliere')) {
+                resilienceChartInstance.data.datasets[0].data = [...nodeDataCrisis];
+                resilienceChartInstance.data.datasets[1].data = [5000, 0, 0, 0];
+                resilienceChartInstance.update();
+                
+                btn.innerText = "System wiederherstellen";
+                btn.classList.remove('bg-[#D4A373]', 'hover:bg-[#c29162]');
+                btn.classList.add('bg-[#8C9B90]', 'hover:bg-[#728076]');
+                statusTxt.innerHTML = "Status: <span class='text-red-500 font-bold'>Knoten 1 ausgefallen.</span> Autonome Lastumverteilung aktiv. Neue Gesamt: 9.000";
+            } else {
+                resilienceChartInstance.data.datasets[0].data = [...nodeDataInitial];
+                resilienceChartInstance.data.datasets[1].data = [0, 0, 0, 0];
+                resilienceChartInstance.update();
+                
+                btn.innerText = "Simuliere Infrastruktur-Kollaps (Knoten 1)";
+                btn.classList.remove('bg-[#8C9B90]', 'hover:bg-[#728076]');
+                btn.classList.add('bg-[#D4A373]', 'hover:bg-[#c29162]');
+                statusTxt.innerHTML = "Status: Alle Knoten operativ. Gesamt: 12.500";
+            }
+        }
+
+        function initRegulatoryChart() {
+            const ctx = document.getElementById('regulatoryChart').getContext('2d');
+            regulatoryChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'GP-Struktur (AlphaFold)',
+                        'In-silico-Neutralisation',
+                        'CD8+ T-Zell-Antwort',
+                        'Sicherheits-Profil',
+                        'Plattform-Stabilität'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Referenz: rVSV-ZEBOV',
+                            data: [98, 95, 100, 100, 100],
+                            fill: true,
+                            backgroundColor: 'rgba(212, 163, 115, 0.2)',
+                            borderColor: colors.accent,
+                            pointBackgroundColor: colors.accent,
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: colors.accent
+                        },
+                        {
+                            label: 'Neu: rVSV-SUDV',
+                            data: [97, 92, 100, 100, 100],
+                            fill: true,
+                            backgroundColor: 'rgba(140, 155, 144, 0.4)',
+                            borderColor: colors.main,
+                            pointBackgroundColor: colors.main,
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: colors.main
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { family: 'Inter' } } }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: { font: { family: 'Inter', size: 11 }, color: '#4a4a4a' },
+                            ticks: { backdropColor: 'transparent', min: 80, max: 100, stepSize: 5 }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHashSimulator();
+        });
+
+    </script>
+</body>
+</html>
